@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h5>成功</h5>
+<div th:text="${hello}" th:id="div01" th:class="class01">这是欢迎信息</div>
+<div th:text="${hello}"></div>
+<div th:utext="${hello}"></div>
+
+<!--3个h4-->
+<h4 th:text="${user}" th:each="user:${users}"></h4>
+<h4>
+    <!--h4里有4个span-->
+    <span th:each="user:${users}">[[${user}]]</span>
+</h4>
+<hr>
+
+</body>
+</html>
