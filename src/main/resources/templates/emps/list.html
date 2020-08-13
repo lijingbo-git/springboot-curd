@@ -13,7 +13,7 @@
 		<link href="../../static/asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="../../static/asserts/css/dashboard.css" th:href="@{/assert/css/dashboard.css}" rel="stylesheet">
+		<link href="../../static/asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -74,31 +74,34 @@
 									<td th:text="${#dates.format(emp.birth,'yyyy-MM-dd HH:mm:ss')}">sit</td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}"> 编辑</a>
-										<button class="btn btn-sm btn-danger">删除</button>
+										<button class="btn btn-sm btn-danger deleteBtn" th:attr="delete_uri=@{/empdelete/}+${emp.id}">删除</button>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</main>
+				<form id="deleteEmpForm"  method="post">
+
 			</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:href="@{/webjars/jquery/3.4.1/jquery.slim.js}" src="../../static/asserts/js/jquery-3.2.1.slim.min.js"></script>
-		<script type="text/javascript" th:href="@{/webjars/popper.js/1.16.0/popper.min.js}" src="../../static/asserts/js/popper.min.js"></script>
-		<script type="text/javascript" th:href="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}" src="../../static/asserts/js/bootstrap.min.js"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.slim.js}" src="../../static/asserts/js/jquery-3.2.1.slim.min.js"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}" src="../../static/asserts/js/popper.min.js"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}" src="../../static/asserts/js/bootstrap.min.js"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" th:href="@{/assert/js/feather.min.js}" src="../../static/asserts/js/feather.min.js"></script>
+		<script type="text/javascript" th:src="@{/asserts/js/feather.min.js}" src="../../static/asserts/js/feather.min.js"></script>
 		<script>
-			feather.replace()
+			feather.replace()<input type="hidden" name="_method" value="delete"/>
+					</form>
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" th:href="@{/assert/js/Chart.min.js}" src="../../static/asserts/js/Chart.min.js"></script>
+		<script type="text/javascript" th:src="@{/asserts/js/Chart.min.js}" src="../../static/asserts/js/Chart.min.js"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {
@@ -128,7 +131,14 @@
 				}
 			});
 		</script>
-
+		<script>
+			$(".deleteBtn").click(function () {
+				//修改删除表单的action地址
+				alert("点击删除");
+				$("#deleteEmpForm").attr("action",$(this).attr("delete_uri")).submit();
+				return false;
+			});
+		</script>
 	</body>
 
 </html>

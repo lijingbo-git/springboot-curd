@@ -58,6 +58,13 @@ public class EmployeeController {
     @PutMapping("/emp")
     public String EditPage(Employee employee){
         System.out.println(employee);
+        employeeDao.save(employee);
+        return "redirect:/emps";
+    }
+    //删除操作
+    @PostMapping("/empdelete/{id}")
+    public String deletePage(@PathVariable("id") Integer id){
+        employeeDao.delete(id);
         return "redirect:/emps";
     }
 }
